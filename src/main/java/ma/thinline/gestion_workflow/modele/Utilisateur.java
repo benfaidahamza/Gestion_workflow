@@ -26,5 +26,6 @@ public class Utilisateur {
     private Date dateNaissance;
     private String Email;
     private String password;
-
+    @Embedded
+    private Adresse adresse;
 }
