@@ -28,4 +28,7 @@ public class Utilisateur {
     private String password;
     @Embedded
     private Adresse adresse;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="Id_role",nullable = false)
+    private Role role;
 }
