@@ -13,14 +13,14 @@ import java.util.Date;
 @AllArgsConstructor
 
 public class UtilisateurVo {
-    private Long Id_user ;
-    private String First_name;
-    private String Last_name;
-    private String Cin;
-    private String Phone;
+    private Long user_id ;
+    private String first_name;
+    private String last_name;
+    private String cin;
+    private String phone;
     private Integer age;
     private Date dateNaissance;
-    private String Email;
+    private String email;
     private String password;
     private Adresse adresse;
     private Role role;

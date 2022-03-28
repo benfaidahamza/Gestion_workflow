@@ -16,15 +16,16 @@ import java.util.Date;
 public class Utilisateur {
 
     @Id //pour identifier la clé primaire
-    @GeneratedValue(strategy =GenerationType.IDENTITY)
-    private Long Id_user ;
-    private String First_name;
-    private String Last_name;
-    private String Cin;
-    private String Phone;
+    @GeneratedValue(strategy =GenerationType.AUTO)
+    private Long user_id ;
+    private String first_name;
+    private String last_name;
+    private String cin;
+    private String phone;
     private Integer age;
     private Date dateNaissance;
-    private String Email;
+    @Column(unique = true)
+    private String email;
     private String password;
     @Embedded
     private Adresse adresse;
