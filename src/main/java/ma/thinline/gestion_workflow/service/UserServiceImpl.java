@@ -47,10 +47,7 @@ public class UserServiceImpl implements  IUserService{
     @Override
     public void save (UtilisateurVo vo)
     {
-        System.out.println("1");
-        System.out.println(vo.getFirst_name());
         Utilisateur bo= UtilisateurConvert.toBo(vo);
-        System.out.println(vo.getAdresse());
         List<Role> rolesPersist = new ArrayList<>();
         System.out.println("2");
         for (Role role : bo.getRoles()) {
@@ -86,6 +83,16 @@ public class UserServiceImpl implements  IUserService{
     public RoleVo getRoleByName(String role) {
         return RoleConvert.toVo(rolerepo.findByRole(role).get(0));
     }
+
+    @Override
+    public UtilisateurVo getUserById(Long id)
+    {
+        Utilisateur s=userrepo.getById(id);
+        return UtilisateurConvert.toVo(s);
+    }
+
+
+
 
 
 

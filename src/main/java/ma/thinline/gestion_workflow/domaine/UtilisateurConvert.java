@@ -1,9 +1,11 @@
 package ma.thinline.gestion_workflow.domaine;
 
 import ma.thinline.gestion_workflow.modele.Utilisateur;
+import ma.thinline.gestion_workflow.domaine.UtilisateurVo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 public class UtilisateurConvert {

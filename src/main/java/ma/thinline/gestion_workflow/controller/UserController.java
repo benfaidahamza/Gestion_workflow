@@ -2,11 +2,13 @@ package ma.thinline.gestion_workflow.controller;
 
 import ma.thinline.gestion_workflow.domaine.RoleConvert;
 import ma.thinline.gestion_workflow.domaine.RoleVo;
+import ma.thinline.gestion_workflow.domaine.UtilisateurConvert;
 import ma.thinline.gestion_workflow.domaine.UtilisateurVo;
 import ma.thinline.gestion_workflow.modele.Role;
 import ma.thinline.gestion_workflow.modele.Utilisateur;
 import ma.thinline.gestion_workflow.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -43,8 +45,14 @@ public class UserController {
     @RequestMapping(value ="/save", method = RequestMethod.POST)
     public void save(@RequestBody UtilisateurVo UserVo) {
         System.out.println("hamza");
-        System.out.println(UserVo.getFirst_name());
         userservice.save(UserVo);
     }
+
+    @RequestMapping(value ="/user/{id}",method = RequestMethod.GET)
+    public UtilisateurVo getUserById(@PathVariable("id")Long id)
+    {
+      return userservice.getUserById(id);
+    }
+
 
 }

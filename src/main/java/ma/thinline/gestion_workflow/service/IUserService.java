@@ -2,6 +2,7 @@ package ma.thinline.gestion_workflow.service;
 
 import ma.thinline.gestion_workflow.domaine.RoleVo;
 import ma.thinline.gestion_workflow.domaine.UtilisateurVo;
+import ma.thinline.gestion_workflow.modele.Utilisateur;
 //import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -17,5 +18,6 @@ public interface IUserService /*extends UserDetailsService*/ {
     List<UtilisateurVo> getAllUsers();
     List<RoleVo> getAllRoles();
     RoleVo getRoleByName(String role);
+    UtilisateurVo getUserById(Long id);
 
 }
