@@ -9,7 +9,7 @@ import java.util.List;
 public class UtilisateurConvert {
 
     public static UtilisateurVo toVo (Utilisateur user) {
-        if (user == null || user.getUser_id() ==null)
+        if (user == null )
             return null;
         UtilisateurVo vo = new UtilisateurVo();
         vo.setUser_id(user.getUser_id());
@@ -18,16 +18,15 @@ public class UtilisateurConvert {
         vo.setPhone(user.getPhone());
         vo.setCin(user.getCin());
         vo.setEmail(user.getEmail());
-        vo.setDateNaissance(user.getDateNaissance());
         vo.setFirst_name(user.getFirst_name());
         vo.setLast_name(user.getLast_name());
         vo.setPassword(user.getPassword());
-        vo.setRole(user.getRole());
+        vo.setRoles(RoleConvert.toListVo(user.getRoles()));
         return vo;
     }
 
     public static Utilisateur toBo (UtilisateurVo vo) {
-        if (vo == null || vo.getUser_id() ==null)
+        if (vo == null )
             return null;
         Utilisateur user = new Utilisateur();
         user.setUser_id(vo.getUser_id());
@@ -36,11 +35,10 @@ public class UtilisateurConvert {
         user.setPhone(vo.getPhone());
         user.setCin(vo.getCin());
         user.setEmail(vo.getEmail());
-        user.setDateNaissance(vo.getDateNaissance());
         user.setFirst_name(vo.getFirst_name());
         user.setLast_name(vo.getLast_name());
         user.setPassword(vo.getPassword());
-        user.setRole(vo.getRole());
+        user.setRoles(RoleConvert.toListBo(vo.getRoles()));
         return user;
     }
     public static List<UtilisateurVo> toListVo (List <Utilisateur> listBo) {

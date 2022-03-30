@@ -9,12 +9,11 @@ public class RoleConvert {
 
     public  static RoleVo toVo (Role bo)
     {
-        if(bo==null)
+        if(bo==null )
             return null;
         RoleVo vo=new RoleVo();
         vo.setRole_id(bo.getRole_id());
         vo.setRole(bo.getRole());
-        vo.setUtilisateurs(UtilisateurConvert.toListVo(bo.getUtilisateurs()));
         return vo;
     }
     public  static Role toBo (RoleVo Vo)
@@ -24,7 +23,7 @@ public class RoleConvert {
         Role bo=new Role();
         bo.setRole_id(Vo.getRole_id());
         bo.setRole(Vo.getRole());
-        bo.setUtilisateurs(UtilisateurConvert.toListBo(Vo.getUtilisateurs()));
+
         return bo;
     }
     public static List<RoleVo> toListVo (List <Role> listBo) {

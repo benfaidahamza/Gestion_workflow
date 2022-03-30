@@ -14,6 +14,6 @@ public class Adresse {
     private String streetAdress;
     private String city;
     private String country;
-    private String postalcode;
+
 }
 

@@ -1,14 +1,14 @@
 package ma.thinline.gestion_workflow;
 
-import ma.thinline.gestion_workflow.modele.Enumrole;
-import ma.thinline.gestion_workflow.modele.Role;
 import ma.thinline.gestion_workflow.modele.Utilisateur;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @SpringBootApplication
 public class GestionWorkflowApplication {
+
 
     public static void main(String[] args) {
         SpringApplication.run(GestionWorkflowApplication.class, args);
@@ -23,5 +23,12 @@ public class GestionWorkflowApplication {
         //System.out.println("bonjour AGE"+personne.getAge());
 
     }
+
+
+   /* @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder;
+    }*/
 
 }

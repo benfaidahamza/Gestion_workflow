@@ -5,9 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-@Data //la génération des getters et des setters...
+@Data//la génération des getters et des setters...
 @Entity //la génération d'une entité
 @NoArgsConstructor //la génération d'un constructeur sans argument
 @AllArgsConstructor //la génération d'un constructeur avec argument
@@ -23,13 +25,14 @@ public class Utilisateur {
     private String cin;
     private String phone;
     private Integer age;
-    private Date dateNaissance;
     @Column(unique = true)
     private String email;
     private String password;
     @Embedded
     private Adresse adresse;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="Id_role",nullable = false)
-    private Role role;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles = new ArrayList<>();
+
+
 }
