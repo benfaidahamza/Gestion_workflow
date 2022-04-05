@@ -1,101 +1,104 @@
 package ma.thinline.gestion_workflow.service;
 
 import ma.thinline.gestion_workflow.dao.RoleRepository;
-import ma.thinline.gestion_workflow.dao.UserRepository;
-import ma.thinline.gestion_workflow.domaine.RoleConvert;
-import ma.thinline.gestion_workflow.domaine.RoleVo;
-import ma.thinline.gestion_workflow.domaine.UtilisateurConvert;
-import ma.thinline.gestion_workflow.domaine.UtilisateurVo;
+import ma.thinline.gestion_workflow.dao.UtilisateurRepository;
+import ma.thinline.gestion_workflow.dto.RoleDto;
+import ma.thinline.gestion_workflow.dto.UtilisateurDto;
+import ma.thinline.gestion_workflow.mapper.EntityMapper;
+import ma.thinline.gestion_workflow.mapper.RoleMapper;
+import ma.thinline.gestion_workflow.mapper.UtilisateurMapper;
 import ma.thinline.gestion_workflow.modele.Role;
 import ma.thinline.gestion_workflow.modele.Utilisateur;
-import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UsernameNotFoundException;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import ma.thinline.gestion_workflow.exception.RessourceNotFound;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
-public class UserServiceImpl implements  IUserService{
-    @Autowired
-    private UserRepository userrepo;
-    @Autowired
-    private RoleRepository rolerepo;
-    //@Autowired(required = true)
-    //private BCryptPasswordEncoder bCryptPasswordEncoder;
+public class UserServiceImpl implements IUserService {
+    private final UtilisateurRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final EntityManager entityManager;
+    private final RoleMapper roleMapper;
 
-    public UserServiceImpl(UserRepository userrepo,RoleRepository rolerepo/*,BCryptPasswordEncoder bCryptPasswordEncoder*/ )
-    {
-        this.userrepo=userrepo;
-        this.rolerepo=rolerepo;
-        //this.bCryptPasswordEncoder=bCryptPasswordEncoder;
+    private final UtilisateurMapper utilisateurMapper;
+
+    public UserServiceImpl(UtilisateurRepository userRepository, RoleRepository roleRepository, RoleMapper roleMapper, UtilisateurMapper utilisateurMapper, EntityManager entityManager) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.roleMapper = roleMapper;
+        this.utilisateurMapper = utilisateurMapper;
+        this.entityManager = entityManager;
     }
 
-   /* @Override
-    public UserDetails loadUserByEmail (String email) throws UsernameNotFoundException{
-        Utilisateur user=userrepo.findByEmail(email);
-        boolean enabled =true;
-        boolean accountNonExpired=true;
-        boolean credentialsNonExpired=true;
-        boolean accountNonLocked= true;
-        return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),enabled,accountNonExpired,credentialsNonExpired,accountNonLocked,getAuthorities(user.getRole()));
-    }*/
     @Override
-    public void save (UtilisateurVo vo)
-    {
-        Utilisateur bo= UtilisateurConvert.toBo(vo);
+    public void save(UtilisateurDto dto) {
+        Utilisateur entity = utilisateurMapper.toEntity(dto);
         List<Role> rolesPersist = new ArrayList<>();
-        System.out.println("2");
-        for (Role role : bo.getRoles()) {
-            Role userRole = rolerepo.findByRole(role.getRole()).get(0);
+
+        for (Role role : entity.getRoles()) {
+            Role userRole = roleRepository.findByRole(role.getRole());
             rolesPersist.add(userRole);
         }
-        System.out.println("1");
-        bo.setRoles(rolesPersist);
-        userrepo.save(bo);
+        entity.setRoles(rolesPersist);
+        userRepository.save(entity);
     }
+
     @Override
-    public UtilisateurVo findByEmail(String Email)
+    public UtilisateurDto findByEmail(String Email) {
+        return utilisateurMapper.toDto(userRepository.findByEmail(Email));
+    }
+
+    @Override
+    public List<UtilisateurDto> getAllUsers() {
+        return utilisateurMapper.toDto(userRepository.findAll());
+    }
+
+    @Override
+    public List<RoleDto> getAllRoles() {
+        return roleMapper.toDto(roleRepository.findAll());
+    }
+
+    @Override
+    public void save(RoleDto roleDto) {
+        roleRepository.save(roleMapper.toEntity(roleDto));
+    }
+
+    @Override
+    public RoleDto getRoleByName(String role) {
+        return roleMapper.toDto(roleRepository.findByRole(role));
+    }
+
+    @Override
+    public UtilisateurDto getUserById(Long id) {
+        Utilisateur entity = userRepository.getById(id);
+        return utilisateurMapper.toDto(entity);
+    }
+
+    @Override
+    public void UpdateUser(Long id,UtilisateurDto dto)
     {
-        return UtilisateurConvert.toVo(userrepo.findByEmail(Email));
+        System.out.println("2");
+        Utilisateur entity=userRepository.getById(id);
+        entity.setAdresse(dto.getAdresse());
+        entity.setAge(dto.getAge());
+        entity.setCin(dto.getCin());
+        entity.setEmail(dto.getEmail());
+        entity.setFirst_name(dto.getFirst_name());
+        entity.setLast_name(dto.getLast_name());
+        entity.setPhone(dto.getPhone());
+        userRepository.save(entity);
+
     }
 
     @Override
-    public List<UtilisateurVo> getAllUsers()
-    {
-        return UtilisateurConvert.toListVo(userrepo.findAll());
+    public void DeleteUser(Long id){
+        userRepository.delete(userRepository.getById(id));
     }
-
-    @Override
-    public List<RoleVo> getAllRoles() {
-        return RoleConvert.toListVo(rolerepo.findAll());
-    }
-    @Override
-    public void save(RoleVo roleVo) {
-        rolerepo.save(RoleConvert.toBo(roleVo));
-    }
-
-    @Override
-    public RoleVo getRoleByName(String role) {
-        return RoleConvert.toVo(rolerepo.findByRole(role).get(0));
-    }
-
-    @Override
-    public UtilisateurVo getUserById(Long id)
-    {
-        Utilisateur s=userrepo.getById(id);
-        return UtilisateurConvert.toVo(s);
-    }
-
-
-
-
-
-
-
 
 }

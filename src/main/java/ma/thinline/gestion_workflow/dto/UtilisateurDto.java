@@ -1,40 +1,27 @@
-package ma.thinline.gestion_workflow.modele;
+package ma.thinline.gestion_workflow.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
+import java.io.Serializable;
 import java.util.List;
 
-//@Data//la génération des getters et des setters...
-@Entity //la génération d'une entité
-@NoArgsConstructor //la génération d'un constructeur sans argument
-@AllArgsConstructor //la génération d'un constructeur avec argument
 
+@AllArgsConstructor
+@NoArgsConstructor
 
-public class Utilisateur {
+public class UtilisateurDto implements Serializable {
 
-    @Id //pour identifier la clé primaire
-    @GeneratedValue(strategy =GenerationType.IDENTITY)
-    private Long user_id ;
+    private Long user_id;
     private String first_name;
     private String last_name;
     private String cin;
     private String phone;
     private Integer age;
-    @Column(unique = true)
     private String email;
     private String password;
     private String adresse;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> roles = new ArrayList<>();
-
+    private List<RoleDto> roles;
 
     public Long getUser_id() {
         return user_id;
@@ -108,15 +95,12 @@ public class Utilisateur {
         this.adresse = adresse;
     }
 
-    public List<Role> getRoles() {
+    public List<RoleDto> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(List<RoleDto> roles) {
         this.roles = roles;
     }
-
-
-    public void supprimerrole(Role role) {this.roles.remove(role);}
 
 }

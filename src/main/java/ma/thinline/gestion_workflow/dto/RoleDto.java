@@ -1,20 +1,17 @@
-package ma.thinline.gestion_workflow.modele;
+package ma.thinline.gestion_workflow.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 
-import javax.persistence.*;
-
-@Entity
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
-//@Data
-public class Role {
+@NoArgsConstructor
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RoleDto implements Serializable {
+
     private long role_id;
     private String role;
 
@@ -26,13 +23,11 @@ public class Role {
         this.role_id = role_id;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public String getRole() {
         return role;
     }
 
-
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
