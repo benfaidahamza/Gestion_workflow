@@ -115,8 +115,5 @@ public class Utilisateur {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
-
-
-    public void supprimerrole(Role role) {this.roles.remove(role);}
-
+ 
 }
