@@ -45,6 +45,7 @@ public class UserServiceImpl implements IUserService {
             Role userRole = roleRepository.findByRole(role.getRole());
             rolesPersist.add(userRole);
         }
+        
         entity.setRoles(rolesPersist);
         userRepository.save(entity);
     }

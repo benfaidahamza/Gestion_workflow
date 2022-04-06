@@ -20,9 +20,9 @@ public interface IUserService {
     RoleDto getRoleByName(String role);
 
     UtilisateurDto getUserById(Long id);
-
+    
     void UpdateUser(Long id,UtilisateurDto dto);
-
+    
     void DeleteUser (Long id);
 
 }
