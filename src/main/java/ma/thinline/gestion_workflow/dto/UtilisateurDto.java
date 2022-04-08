@@ -3,12 +3,14 @@ package ma.thinline.gestion_workflow.dto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+
 import java.io.Serializable;
 import java.util.List;
 
 
 @AllArgsConstructor
 @NoArgsConstructor
+
 
 public class UtilisateurDto implements Serializable {
 
@@ -22,6 +24,7 @@ public class UtilisateurDto implements Serializable {
     private String password;
     private String adresse;
     private List<RoleDto> roles;
+    private List<WorkflowDto> workflows;
 
     public Long getUser_id() {
         return user_id;
@@ -103,4 +106,7 @@ public class UtilisateurDto implements Serializable {
         this.roles = roles;
     }
 
+    public List<WorkflowDto> getWorkflows() {return workflows;}
+
+    public void setWorkflows(List<WorkflowDto> workflows) {this.workflows = workflows;}
 }

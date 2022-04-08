@@ -33,11 +33,15 @@ public class Utilisateur {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> roles = new ArrayList<>();
+    private List<Role> roles ;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_workflow", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "workflow_id"))
-    private  List<Workflow> workflows=new ArrayList<>();
+    private  List<Workflow> workflows;
+
+    public List<Workflow> getWorkflows() { return workflows; }
+
+    public void setWorkflows(List<Workflow> workflows) { this.workflows = workflows; }
 
     public Long getUser_id() {
         return user_id;

@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class Tache {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tache_id;
     private String titre;
     private String type;
@@ -23,6 +23,8 @@ public class Tache {
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "workflow_id", nullable = false)
     private Workflow workflow;
+
+
     @ManyToOne
     @JoinColumn(name = "etat_id", nullable = false)
     private Etat etat;
@@ -50,4 +52,12 @@ public class Tache {
     public int getOrdre() { return ordre;}
 
     public void setOrdre(int ordre) { this.ordre = ordre;}
+
+    public Workflow getWorkflow() { return workflow;}
+
+    public void setWorkflow(Workflow workflow) { this.workflow = workflow;}
+
+    public Etat getEtat() {return etat;}
+
+    public void setEtat(Etat etat) {this.etat = etat;}
 }

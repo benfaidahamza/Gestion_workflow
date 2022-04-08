@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -15,19 +15,11 @@ public class RoleDto implements Serializable {
     private long role_id;
     private String role;
 
-    public long getRole_id() {
-        return role_id;
-    }
+    public long getRole_id() { return role_id;}
 
-    public void setRole_id(long role_id) {
-        this.role_id = role_id;
-    }
+    public void setRole_id(long role_id) { this.role_id = role_id;}
 
-    public String getRole() {
-        return role;
-    }
+    public String getRole() { return role;}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+    public void setRole(String role) { this.role = role;}
 }

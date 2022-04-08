@@ -2,11 +2,14 @@ package ma.thinline.gestion_workflow.service;
 
 import ma.thinline.gestion_workflow.dao.RoleRepository;
 import ma.thinline.gestion_workflow.dao.UtilisateurRepository;
+import ma.thinline.gestion_workflow.dao.WorkflowRepository;
 import ma.thinline.gestion_workflow.dto.RoleDto;
 import ma.thinline.gestion_workflow.dto.UtilisateurDto;
+import ma.thinline.gestion_workflow.dto.WorkflowDto;
 import ma.thinline.gestion_workflow.mapper.EntityMapper;
 import ma.thinline.gestion_workflow.mapper.RoleMapper;
 import ma.thinline.gestion_workflow.mapper.UtilisateurMapper;
+import ma.thinline.gestion_workflow.mapper.WorkflowMapper;
 import ma.thinline.gestion_workflow.modele.Role;
 import ma.thinline.gestion_workflow.modele.Utilisateur;
 import org.springframework.http.ResponseEntity;
@@ -23,17 +26,14 @@ import java.util.List;
 public class UserServiceImpl implements IUserService {
     private final UtilisateurRepository userRepository;
     private final RoleRepository roleRepository;
-    private final EntityManager entityManager;
     private final RoleMapper roleMapper;
-
     private final UtilisateurMapper utilisateurMapper;
 
-    public UserServiceImpl(UtilisateurRepository userRepository, RoleRepository roleRepository, RoleMapper roleMapper, UtilisateurMapper utilisateurMapper, EntityManager entityManager) {
+    public UserServiceImpl(UtilisateurRepository userRepository, RoleRepository roleRepository, RoleMapper roleMapper, UtilisateurMapper utilisateurMapper) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.roleMapper = roleMapper;
         this.utilisateurMapper = utilisateurMapper;
-        this.entityManager = entityManager;
     }
 
     @Override
@@ -101,5 +101,6 @@ public class UserServiceImpl implements IUserService {
     public void DeleteUser(Long id){
         userRepository.delete(userRepository.getById(id));
     }
+
 
 }

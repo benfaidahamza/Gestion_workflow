@@ -5,7 +5,7 @@ import ma.thinline.gestion_workflow.modele.Utilisateur;
 import org.mapstruct.Mapper;
 
 
-@Mapper(componentModel = "spring" , uses = {RoleMapper.class})
+@Mapper(componentModel = "spring" /*uses = {RoleMapper.class,WorkflowMapper.class}*/)
 public interface UtilisateurMapper extends EntityMapper<UtilisateurDto,Utilisateur> {
 
 }

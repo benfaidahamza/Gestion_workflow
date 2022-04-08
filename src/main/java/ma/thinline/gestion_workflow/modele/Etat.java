@@ -14,7 +14,7 @@ import javax.persistence.Id;
 
 public class Etat {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long etat_id;
     private String statut;
 

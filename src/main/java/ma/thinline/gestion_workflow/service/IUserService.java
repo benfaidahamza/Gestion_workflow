@@ -2,6 +2,7 @@ package ma.thinline.gestion_workflow.service;
 
 import ma.thinline.gestion_workflow.dto.RoleDto;
 import ma.thinline.gestion_workflow.dto.UtilisateurDto;
+import ma.thinline.gestion_workflow.dto.WorkflowDto;
 
 import java.util.List;
 
