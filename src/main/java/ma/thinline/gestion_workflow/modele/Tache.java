@@ -3,10 +3,7 @@ package ma.thinline.gestion_workflow.modele;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -22,6 +19,13 @@ public class Tache {
     private Date date_validation;
     private String assignement;
     private int ordre;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "workflow_id", nullable = false)
+    private Workflow workflow;
+    @ManyToOne
+    @JoinColumn(name = "etat_id", nullable = false)
+    private Etat etat;
 
     public Long getTache_id() { return tache_id;}
 

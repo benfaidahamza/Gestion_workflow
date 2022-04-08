@@ -35,6 +35,9 @@ public class Utilisateur {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_workflow", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "workflow_id"))
+    private  List<Workflow> workflows=new ArrayList<>();
 
     public Long getUser_id() {
         return user_id;
