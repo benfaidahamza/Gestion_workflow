@@ -10,15 +10,9 @@ public interface IUserService {
 
     UtilisateurDto findByEmail(String email);
 
-    void save(UtilisateurDto utilisateurDto);
-
-    void save(RoleDto roleDto);
+    void saveUser(UtilisateurDto utilisateurDto);
 
     List<UtilisateurDto> getAllUsers();
-
-    List<RoleDto> getAllRoles();
-
-    RoleDto getRoleByName(String role);
 
     UtilisateurDto getUserById(Long id);
     

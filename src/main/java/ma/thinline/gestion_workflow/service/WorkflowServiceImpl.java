@@ -3,10 +3,12 @@ package ma.thinline.gestion_workflow.service;
 import ma.thinline.gestion_workflow.dao.RoleRepository;
 import ma.thinline.gestion_workflow.dao.UtilisateurRepository;
 import ma.thinline.gestion_workflow.dao.WorkflowRepository;
+import ma.thinline.gestion_workflow.dto.UtilisateurDto;
 import ma.thinline.gestion_workflow.dto.WorkflowDto;
 import ma.thinline.gestion_workflow.mapper.RoleMapper;
 import ma.thinline.gestion_workflow.mapper.UtilisateurMapper;
 import ma.thinline.gestion_workflow.mapper.WorkflowMapper;
+import ma.thinline.gestion_workflow.modele.Utilisateur;
 import ma.thinline.gestion_workflow.modele.Workflow;
 import org.springframework.stereotype.Service;
 
@@ -33,11 +35,27 @@ public class WorkflowServiceImpl implements IWorkflowService{
         Workflow entity=workflowMapper.toEntity(dto);
         workflowRepository.save(entity);
     }
+
     @Override
     public List<WorkflowDto> getWorkflowByStatut(String statut)
     {
         return workflowMapper.toDto(workflowRepository.findAllByStatut(statut));
     }
 
+    @Override
+    public void UpdateWorkflow(Long id, WorkflowDto dto){
+        Workflow entity=workflowRepository.getById(id);
+        entity.setStatut(dto.getStatut());
+        entity.setTitre(dto.getTitre());
+    }
 
+    @Override
+    public void DeleteWorkflow(Long id ){
+        workflowRepository.delete(workflowRepository.getById(id));
+    }
+
+    @Override
+    public  WorkflowDto getWorkflowById(Long id){
+        return workflowMapper.toDto(workflowRepository.getById(id));
+    }
 }

@@ -15,9 +15,9 @@ public interface IWorkflowService {
 
     List<WorkflowDto> getWorkflowByStatut(String statut);
 
-   // WorkflowDto getUserById(Long id);
+    WorkflowDto getWorkflowById(Long id);
 
-    //void UpdateUser(Long id,WorkflowDto dto);
+    void UpdateWorkflow(Long id,WorkflowDto dto);
 
-    //void DeleteUser (Long id);
+    void DeleteWorkflow (Long id);
 }

@@ -12,6 +12,7 @@ import ma.thinline.gestion_workflow.mapper.UtilisateurMapper;
 import ma.thinline.gestion_workflow.mapper.WorkflowMapper;
 import ma.thinline.gestion_workflow.modele.Role;
 import ma.thinline.gestion_workflow.modele.Utilisateur;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ma.thinline.gestion_workflow.exception.RessourceNotFound;
@@ -25,24 +26,25 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements IUserService {
     private final UtilisateurRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final RoleMapper roleMapper;
     private final UtilisateurMapper utilisateurMapper;
+    private final RoleMapper roleMapper;
 
-    public UserServiceImpl(UtilisateurRepository userRepository, RoleRepository roleRepository, RoleMapper roleMapper, UtilisateurMapper utilisateurMapper) {
+    @Autowired
+    private RoleServiceImpl roleService;
+
+    public UserServiceImpl(UtilisateurRepository userRepository, UtilisateurMapper utilisateurMapper,RoleMapper roleMapper) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.roleMapper = roleMapper;
         this.utilisateurMapper = utilisateurMapper;
+        this.roleMapper = roleMapper;
     }
 
     @Override
-    public void save(UtilisateurDto dto) {
+    public void saveUser(UtilisateurDto dto) {
         Utilisateur entity = utilisateurMapper.toEntity(dto);
         List<Role> rolesPersist = new ArrayList<>();
 
         for (Role role : entity.getRoles()) {
-            Role userRole = roleRepository.findByRole(role.getRole());
+            Role userRole =roleMapper.toEntity(roleService.getRoleByName(role.getRole()));
             rolesPersist.add(userRole);
         }
         
@@ -61,21 +63,6 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public List<RoleDto> getAllRoles() {
-        return roleMapper.toDto(roleRepository.findAll());
-    }
-
-    @Override
-    public void save(RoleDto roleDto) {
-        roleRepository.save(roleMapper.toEntity(roleDto));
-    }
-
-    @Override
-    public RoleDto getRoleByName(String role) {
-        return roleMapper.toDto(roleRepository.findByRole(role));
-    }
-
-    @Override
     public UtilisateurDto getUserById(Long id) {
         Utilisateur entity = userRepository.getById(id);
         return utilisateurMapper.toDto(entity);
@@ -84,7 +71,6 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void UpdateUser(Long id,UtilisateurDto dto)
     {
-        System.out.println("2");
         Utilisateur entity=userRepository.getById(id);
         entity.setAdresse(dto.getAdresse());
         entity.setAge(dto.getAge());

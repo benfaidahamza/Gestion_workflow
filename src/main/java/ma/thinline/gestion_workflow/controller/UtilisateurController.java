@@ -16,7 +16,7 @@ public class UtilisateurController {
     @Autowired
     private IUserService userservice;
 
-    @GetMapping(value = "/listusers")
+    @GetMapping(value = "listusers")
     public ResponseEntity<List> ViewUsers() {
         List<UtilisateurDto> list= userservice.getAllUsers();
         return  ResponseEntity.ok(list);
@@ -28,25 +28,25 @@ public class UtilisateurController {
         return  ResponseEntity.ok(dto);
     }
 
-    @PostMapping(value = "/Createuser")
-    public ResponseEntity<UtilisateurDto> CreateUser(@RequestBody UtilisateurDto dto) {
-        userservice.save(dto);
-        return  ResponseEntity.ok(dto);
-    }
-
     @GetMapping(value = "id/{id}")
     public ResponseEntity<UtilisateurDto> getUserById(@PathVariable("id") Long id) {
         UtilisateurDto dto =userservice.getUserById(id);
         return  ResponseEntity.ok(dto);
     }
 
-    @PutMapping(value="/Edit/{id}")
+    @PostMapping(value = "Createuser")
+    public ResponseEntity<String> CreateUser(@RequestBody UtilisateurDto dto) {
+        userservice.saveUser(dto);
+        return  ResponseEntity.ok("l'utilisateur a été créé avec succés");
+    }
+
+    @PutMapping(value="Edit/{id}")
     public ResponseEntity<String> UpdateUser(@PathVariable Long id, @RequestBody UtilisateurDto dto) {
       userservice.UpdateUser(id,dto);
         return ResponseEntity.ok("l'utilisateur a été modifié avec succés");
     }
 
-    @DeleteMapping(value ="/Delete/{id}")
+    @DeleteMapping(value ="Delete/{id}")
     public ResponseEntity<String> DeleteUser(@PathVariable("id") Long id){
         userservice.DeleteUser(id);
         return ResponseEntity.ok("l'utilisateur a été supprimé avec succés");
