@@ -20,9 +20,11 @@ public class Tache {
     private String assignement;
     private int ordre;
 
+    /*
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "workflow_id", nullable = false)
     private Workflow workflow;
+     */
 
 
     @ManyToOne
@@ -53,9 +55,9 @@ public class Tache {
 
     public void setOrdre(int ordre) { this.ordre = ordre;}
 
-    public Workflow getWorkflow() { return workflow;}
+    //public Workflow getWorkflow() { return workflow;}
 
-    public void setWorkflow(Workflow workflow) { this.workflow = workflow;}
+    //public void setWorkflow(Workflow workflow) { this.workflow = workflow;}
 
     public Etat getEtat() {return etat;}
 

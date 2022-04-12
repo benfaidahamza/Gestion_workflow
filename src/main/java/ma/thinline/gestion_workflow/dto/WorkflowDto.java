@@ -1,9 +1,8 @@
 package ma.thinline.gestion_workflow.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import ma.thinline.gestion_workflow.modele.Tache;
+
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,9 +18,7 @@ public class WorkflowDto implements Serializable {
     private String statut;
     private List<TacheDto> taches;
 
-    public Long getWorkflow_id() {
-        return workflow_id;
-    }
+    public Long getWorkflow_id() {return workflow_id;}
 
     public void setWorkflow_id(Long workflow_id) {this.workflow_id = workflow_id;}
 

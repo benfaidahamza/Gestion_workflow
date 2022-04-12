@@ -1,9 +1,7 @@
 package ma.thinline.gestion_workflow.service;
 
 import ma.thinline.gestion_workflow.dao.RoleRepository;
-import ma.thinline.gestion_workflow.dao.UtilisateurRepository;
 import ma.thinline.gestion_workflow.dto.RoleDto;
-import ma.thinline.gestion_workflow.dto.UtilisateurDto;
 import ma.thinline.gestion_workflow.mapper.RoleMapper;
 import ma.thinline.gestion_workflow.modele.Role;
 import org.springframework.stereotype.Service;
@@ -49,6 +47,7 @@ public class RoleServiceImpl implements IRoleService{
     public  void UpdateRole(Long id, RoleDto dto){
      Role entity=roleRepository.getById(id);
      entity.setRole(dto.getRole());
+     roleRepository.save(entity);
     }
 
 }

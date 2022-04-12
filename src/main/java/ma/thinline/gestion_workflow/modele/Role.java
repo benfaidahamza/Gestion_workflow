@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,7 +18,8 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long role_id;
     private String role;
-
+    @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
+    private List<Utilisateur> utilisateurs;
     public long getRole_id() {
         return role_id;
     }

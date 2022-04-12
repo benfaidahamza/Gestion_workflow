@@ -19,7 +19,7 @@ public class Workflow {
     private String titre;
     private String statut;
 
-    @OneToMany(mappedBy = "workflow",fetch =FetchType.LAZY)
+    @OneToMany(/*mappedBy = "workflow",*/fetch =FetchType.LAZY,cascade = CascadeType.REMOVE)
     private List<Tache> taches;
 
     public Long getWorkflow_id() { return workflow_id;}
@@ -29,7 +29,6 @@ public class Workflow {
     public String getTitre() { return titre;}
 
     public void setTitre(String titre) { this.titre = titre;}
-
 
     public String getStatut() { return statut;}
 

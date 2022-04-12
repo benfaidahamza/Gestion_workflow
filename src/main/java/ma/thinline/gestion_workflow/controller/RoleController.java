@@ -43,13 +43,13 @@ public class RoleController {
     @PutMapping(value = "editrole/{id}")
     public  ResponseEntity<String> UpdateRole(@PathVariable Long id, @RequestBody RoleDto dto){
         roleService.UpdateRole(id,dto);
-        return ResponseEntity.ok("l'utilisateur a été modifié avec succés");
+        return ResponseEntity.ok("le role a été modifié avec succés");
     }
 
     @DeleteMapping(value ="deleterole/{id}")
     public ResponseEntity<String> DeleteRole(@PathVariable Long id ){
         roleService.DeleteRole(id);
-        return ResponseEntity.ok("le workflow a été supprimé avec succés");
+        return ResponseEntity.ok("le role a été supprimé avec succés");
     }
 
 }
