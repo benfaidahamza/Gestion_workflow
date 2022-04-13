@@ -35,7 +35,7 @@ public class EtatServiceImpl implements IEtatService {
     }
 
     @Override
-    public void saveRole (EtatDto etatDto) {
+    public void saveEtat (EtatDto etatDto) {
         etatRepository.save(etatMapper.toEntity(etatDto));
     }
 

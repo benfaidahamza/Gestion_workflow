@@ -40,7 +40,7 @@ public class EtatController {
 
     @PostMapping(value = "createetat")
     public ResponseEntity<Object> CreateEtat(@RequestBody EtatDto dto){
-        etatService.saveRole(dto);
+        etatService.saveEtat(dto);
         return new ResponseEntity<>("l'etat a été créé avec succés",HttpStatus.CREATED);
     }
 

@@ -31,7 +31,7 @@ public class TacheServiceImpl implements ITacheService{
     public List<TacheDto> getAllTaches(){ return tacheMapper.toDto(tacheRepository.findAll());}
 
     @Override
-    public void save(TacheDto dto){ tacheRepository.save(tacheMapper.toEntity(dto));}
+    public void saveTache(TacheDto dto){ tacheRepository.save(tacheMapper.toEntity(dto));}
 
     @Override
     public TacheDto getTacheByTitre(String titre){return tacheMapper.toDto(tacheRepository.findAllByTitre(titre));}

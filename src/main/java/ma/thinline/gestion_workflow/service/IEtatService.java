@@ -13,7 +13,7 @@ public interface IEtatService {
 
     EtatDto getUserById(Long id);
 
-    void saveRole(EtatDto etatDto);
+    void saveEtat(EtatDto etatDto);
 
     void UpdateEtat(Long id, EtatDto dto);
 

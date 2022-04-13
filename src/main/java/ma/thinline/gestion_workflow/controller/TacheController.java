@@ -1,6 +1,7 @@
 package ma.thinline.gestion_workflow.controller;
 
 import ma.thinline.gestion_workflow.dto.TacheDto;
+import ma.thinline.gestion_workflow.modele.Tache;
 import ma.thinline.gestion_workflow.service.TacheServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,7 +42,7 @@ public class TacheController {
 
     @PostMapping(value = "createtache")
     public ResponseEntity<String> CreateRole(@Valid @RequestBody TacheDto dto){
-        tacheService.save(dto);
+        tacheService.saveTache(dto);
         return new ResponseEntity<>("la tache a été crée", HttpStatus.CREATED);
     }
 

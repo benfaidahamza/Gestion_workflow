@@ -10,12 +10,12 @@ public interface IUserService {
 
     UtilisateurDto findByEmail(String email);
 
-    void saveUser(UtilisateurDto utilisateurDto);
-
     List<UtilisateurDto> getAllUsers();
 
     UtilisateurDto getUserById(Long id);
-    
+
+    void saveUser(UtilisateurDto utilisateurDto);
+
     void UpdateUser(Long id,UtilisateurDto dto);
     
     void DeleteUser (Long id);

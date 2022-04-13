@@ -11,7 +11,7 @@ public interface IWorkflowService {
 
     List<WorkflowDto> getAllWorkflows();
 
-    void save(WorkflowDto dto);
+    void saveWorkflow(WorkflowDto dto);
 
     List<WorkflowDto> getWorkflowByStatut(String statut);
 

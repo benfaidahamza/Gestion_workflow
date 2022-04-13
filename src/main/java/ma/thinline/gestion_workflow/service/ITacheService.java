@@ -10,7 +10,7 @@ public interface ITacheService {
 
     List<TacheDto> getAllTaches();
 
-    void save(TacheDto dto);
+    void saveTache(TacheDto dto);
 
     TacheDto getTacheByTitre(String titre);
 

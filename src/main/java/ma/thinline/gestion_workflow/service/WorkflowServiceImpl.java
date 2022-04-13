@@ -25,7 +25,7 @@ public class WorkflowServiceImpl implements IWorkflowService{
     public List<WorkflowDto> getAllWorkflows() {return workflowMapper.toDto(workflowRepository.findAll());}
 
     @Override
-    public void save(WorkflowDto dto){
+    public void saveWorkflow(WorkflowDto dto){
         Workflow entity=workflowMapper.toEntity(dto);
         workflowRepository.save(entity);
     }
