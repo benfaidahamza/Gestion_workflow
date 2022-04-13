@@ -1,23 +1,15 @@
 package ma.thinline.gestion_workflow.service;
 
-import ma.thinline.gestion_workflow.dao.RoleRepository;
 import ma.thinline.gestion_workflow.dao.UtilisateurRepository;
-import ma.thinline.gestion_workflow.dao.WorkflowRepository;
-import ma.thinline.gestion_workflow.dto.RoleDto;
 import ma.thinline.gestion_workflow.dto.UtilisateurDto;
-import ma.thinline.gestion_workflow.dto.WorkflowDto;
-import ma.thinline.gestion_workflow.mapper.EntityMapper;
 import ma.thinline.gestion_workflow.mapper.RoleMapper;
 import ma.thinline.gestion_workflow.mapper.UtilisateurMapper;
-import ma.thinline.gestion_workflow.mapper.WorkflowMapper;
 import ma.thinline.gestion_workflow.modele.Role;
 import ma.thinline.gestion_workflow.modele.Utilisateur;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ma.thinline.gestion_workflow.exception.RessourceNotFound;
 
-import javax.persistence.EntityManager;
+
+
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +20,13 @@ public class UserServiceImpl implements IUserService {
     private final UtilisateurRepository userRepository;
     private final UtilisateurMapper utilisateurMapper;
     private final RoleMapper roleMapper;
+    private final RoleServiceImpl roleService;
 
-    @Autowired
-    private RoleServiceImpl roleService;
-
-    public UserServiceImpl(UtilisateurRepository userRepository, UtilisateurMapper utilisateurMapper,RoleMapper roleMapper) {
+    public UserServiceImpl(UtilisateurRepository userRepository, UtilisateurMapper utilisateurMapper,RoleMapper roleMapper,RoleServiceImpl roleService) {
         this.userRepository = userRepository;
         this.utilisateurMapper = utilisateurMapper;
         this.roleMapper = roleMapper;
+        this.roleService=roleService;
     }
 
     @Override
@@ -64,8 +55,10 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UtilisateurDto getUserById(Long id) {
-        Utilisateur entity = userRepository.getById(id);
-        return utilisateurMapper.toDto(entity);
+        boolean trouve = userRepository.existsById(id);
+        if (!trouve)
+            return null;
+        return utilisateurMapper.toDto(userRepository.getOne(id));
     }
 
     @Override
@@ -85,7 +78,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void DeleteUser(Long id){
-        userRepository.delete(userRepository.getById(id));
+        userRepository.deleteById(id);
     }
 
 

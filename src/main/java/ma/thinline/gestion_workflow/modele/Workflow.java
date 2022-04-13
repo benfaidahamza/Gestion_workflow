@@ -19,8 +19,11 @@ public class Workflow {
     private String titre;
     private String statut;
 
-    @OneToMany(/*mappedBy = "workflow",*/fetch =FetchType.LAZY,cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "workflow")
     private List<Tache> taches;
+
+    @ManyToMany(mappedBy = "workflows",fetch = FetchType.LAZY)
+    private List<Utilisateur> utilisateurs;
 
     public Long getWorkflow_id() { return workflow_id;}
 

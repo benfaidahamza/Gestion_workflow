@@ -37,10 +37,15 @@ public class TacheServiceImpl implements ITacheService{
     public TacheDto getTacheByTitre(String titre){return tacheMapper.toDto(tacheRepository.findAllByTitre(titre));}
 
     @Override
-    public TacheDto getTacheById(Long id){return  tacheMapper.toDto(tacheRepository.getById(id));}
+    public TacheDto getTacheById(Long id){
+        boolean trouve = tacheRepository.existsById(id);
+        if (!trouve)
+            return null;
+        return tacheMapper.toDto(tacheRepository.getOne(id));
+    }
 
     @Override
-    public void DeleteTache (Long id){tacheRepository.delete(tacheRepository.getById(id));}
+    public void DeleteTache (Long id){tacheRepository.deleteById(id);}
 
     @Override
     public void UpdateTache(Long id,TacheDto dto){

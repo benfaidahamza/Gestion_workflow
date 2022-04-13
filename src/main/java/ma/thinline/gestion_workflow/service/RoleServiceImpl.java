@@ -38,7 +38,11 @@ public class RoleServiceImpl implements IRoleService{
     }
 
     @Override
-    public RoleDto getUserById(Long id){ return roleMapper.toDto(roleRepository.getById(id));}
+    public RoleDto getRoleById(Long id){
+        boolean trouve = roleRepository.existsById(id);
+        if (!trouve)
+            return null;
+        return roleMapper.toDto(roleRepository.getOne(id));}
 
     @Override
     public void DeleteRole (Long id){ roleRepository.delete(roleRepository.getById(id));}

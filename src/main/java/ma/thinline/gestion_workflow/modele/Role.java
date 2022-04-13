@@ -20,21 +20,12 @@ public class Role {
     private String role;
     @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
     private List<Utilisateur> utilisateurs;
-    public long getRole_id() {
-        return role_id;
-    }
+    public long getRole_id() { return role_id;}
 
-    public void setRole_id(long role_id) {
-        this.role_id = role_id;
-    }
+    public void setRole_id(long role_id) {this.role_id = role_id;}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+    public void setRole(String role) { this.role = role;}
 
-    public String getRole() {
-        return role;
-    }
-
+    public String getRole() { return role;}
 
 }

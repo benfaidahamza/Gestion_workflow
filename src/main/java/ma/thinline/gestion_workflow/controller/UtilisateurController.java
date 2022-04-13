@@ -2,11 +2,12 @@ package ma.thinline.gestion_workflow.controller;
 
 import ma.thinline.gestion_workflow.dto.UtilisateurDto;
 import ma.thinline.gestion_workflow.service.IUserService;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,39 +18,49 @@ public class UtilisateurController {
     private IUserService userservice;
 
     @GetMapping(value = "listusers")
-    public ResponseEntity<List> ViewUsers() {
-        List<UtilisateurDto> list= userservice.getAllUsers();
-        return  ResponseEntity.ok(list);
+    public ResponseEntity<Object> ViewUsers() {
+        return new ResponseEntity<>(userservice.getAllUsers(), HttpStatus.OK);
     }
 
     @GetMapping(value = "email/{email}")
-    public ResponseEntity<UtilisateurDto> getUserByUsernamePassword(@PathVariable("email") String email) {
+    public ResponseEntity<Object> getUserByEmail(@PathVariable("email") String email) {
         UtilisateurDto dto=userservice.findByEmail(email);
-        return  ResponseEntity.ok(dto);
+       if (dto==null)
+            return new ResponseEntity<>("l'utilisateur n'existe pas", HttpStatus.OK);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+
     }
 
     @GetMapping(value = "id/{id}")
-    public ResponseEntity<UtilisateurDto> getUserById(@PathVariable("id") Long id) {
-        UtilisateurDto dto =userservice.getUserById(id);
-        return  ResponseEntity.ok(dto);
+    public ResponseEntity<Object> getUserById(@PathVariable("id") Long id) {
+
+        UtilisateurDto dto=userservice.getUserById(id);
+        if (dto==null)
+            return new ResponseEntity<>("l'utilisateur n'existe pas", HttpStatus.OK);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @PostMapping(value = "Createuser")
-    public ResponseEntity<String> CreateUser(@RequestBody UtilisateurDto dto) {
+    public ResponseEntity<Object> CreateUser(@Valid @RequestBody UtilisateurDto dto) {
         userservice.saveUser(dto);
-        return  ResponseEntity.ok("l'utilisateur a été créé avec succés");
+        return new ResponseEntity<>("l'utilisateur a été crée", HttpStatus.CREATED);
     }
 
     @PutMapping(value="Edit/{id}")
-    public ResponseEntity<String> UpdateUser(@PathVariable Long id, @RequestBody UtilisateurDto dto) {
-      userservice.UpdateUser(id,dto);
-        return ResponseEntity.ok("l'utilisateur a été modifié avec succés");
+    public ResponseEntity<Object> UpdateUser(@PathVariable Long id,@Valid @RequestBody UtilisateurDto dto) {
+        if (userservice.getUserById(id) == null)
+            return new ResponseEntity<>("l'utilisateur n'existe pas", HttpStatus.OK);
+
+        userservice.UpdateUser(id,dto);
+        return new ResponseEntity<>("l'utilisateur a été modifié avec succés", HttpStatus.OK);
     }
 
     @DeleteMapping(value ="Delete/{id}")
     public ResponseEntity<String> DeleteUser(@PathVariable("id") Long id){
+        if (userservice.getUserById(id) == null)
+            return new ResponseEntity<>("l'utilisateur n'existe pas", HttpStatus.OK);
         userservice.DeleteUser(id);
-        return ResponseEntity.ok("l'utilisateur a été supprimé avec succés");
+        return new ResponseEntity<>("l'utilisateur a été supprimé avec succés", HttpStatus.OK);
     }
 
 }

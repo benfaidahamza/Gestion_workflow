@@ -44,12 +44,13 @@ public class WorkflowServiceImpl implements IWorkflowService{
     }
 
     @Override
-    public void DeleteWorkflow(Long id ){
-        workflowRepository.delete(workflowRepository.getById(id));
-    }
+    public void DeleteWorkflow(Long id ){workflowRepository.delete(workflowRepository.getById(id));}
 
     @Override
     public  WorkflowDto getWorkflowById(Long id){
-        return workflowMapper.toDto(workflowRepository.getById(id));
+        boolean trouve = workflowRepository.existsById(id);
+        if (!trouve)
+            return null;
+        return workflowMapper.toDto(workflowRepository.getOne(id));
     }
 }

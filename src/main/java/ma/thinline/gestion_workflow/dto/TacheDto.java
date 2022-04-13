@@ -18,7 +18,6 @@ public class TacheDto implements Serializable {
     private Date date_validation;
     private String assignement;
     private int ordre;
-    //private WorkflowDto workflow;
     private EtatDto etat;
 
     public Long getTache_id() {return tache_id;}
@@ -44,10 +43,6 @@ public class TacheDto implements Serializable {
     public int getOrdre() {return ordre;}
 
     public void setOrdre(int ordre) {this.ordre = ordre;}
-
-    //public WorkflowDto getWorkflow() {return workflow;}
-
-    //public void setWorkflow(WorkflowDto workflow) {this.workflow = workflow;}
 
     public EtatDto getEtat() {return etat;}
 
