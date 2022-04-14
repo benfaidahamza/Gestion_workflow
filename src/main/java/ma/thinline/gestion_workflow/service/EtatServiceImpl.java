@@ -8,6 +8,7 @@ import ma.thinline.gestion_workflow.dto.RoleDto;
 import ma.thinline.gestion_workflow.mapper.EtatMapper;
 import ma.thinline.gestion_workflow.modele.Etat;
 import ma.thinline.gestion_workflow.modele.Role;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class EtatServiceImpl implements IEtatService {
+public class EtatServiceImpl implements IEtatService, CommandLineRunner {
     private final EtatMapper etatMapper;
     private final EtatRepository etatRepository;
 
@@ -57,4 +58,21 @@ public class EtatServiceImpl implements IEtatService {
         etatRepository.save(entity);
     }
 
+    @Override
+    public void run(String... args) throws Exception {
+        /*Etat etat1=new Etat();
+        Etat etat2=new Etat();
+        Etat etat3=new Etat();
+        Etat etat4=new Etat();
+        etat1.setStatut("EN COURS");
+        etat2.setStatut("EN ATTENTE");
+        etat3.setStatut("VALIDE");
+        etat4.setStatut("REFUSE");
+        etatRepository.save(etat1);
+        etatRepository.save(etat2);
+        etatRepository.save(etat3);
+        etatRepository.save(etat4);
+
+         */
+    }
 }

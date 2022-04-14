@@ -41,7 +41,7 @@ public class WorkflowController {
 
     @PostMapping(value="createworkflow")
     public ResponseEntity<Object> CreateWorkflow(@RequestBody WorkflowDto dto){
-       workflowService.save(dto);
+       workflowService.saveWorkflow(dto);
        return new ResponseEntity<>("le workflow a été créé avec succés",HttpStatus.CREATED);
     }
 

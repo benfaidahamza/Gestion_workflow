@@ -4,6 +4,7 @@ import ma.thinline.gestion_workflow.dao.RoleRepository;
 import ma.thinline.gestion_workflow.dto.RoleDto;
 import ma.thinline.gestion_workflow.mapper.RoleMapper;
 import ma.thinline.gestion_workflow.modele.Role;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,7 +13,7 @@ import java.util.List;
 @Service
 @Transactional
 
-public class RoleServiceImpl implements IRoleService{
+public class RoleServiceImpl implements IRoleService, CommandLineRunner {
 
     private final RoleRepository roleRepository;
     private final RoleMapper roleMapper;
@@ -53,5 +54,14 @@ public class RoleServiceImpl implements IRoleService{
      entity.setRole(dto.getRole());
      roleRepository.save(entity);
     }
-
-}
+    @Override
+    public void run(String... args) throws Exception {
+        /*Role role1=new Role();
+        Role role2=new Role();
+        role1.setRole("ADMIN");
+        role2.setRole("UTILISATEUR");
+        roleRepository.save(role1);
+        roleRepository.save(role2);
+         */
+    }
+    }

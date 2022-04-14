@@ -12,18 +12,7 @@ public class GestionWorkflowApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(GestionWorkflowApplication.class, args);
-        //Utilisateur personne =new Utilisateur();
-        //Role r=new Role();
-        //Enumrole s=Enumrole.Beneficiaire;
-        //r.setName_role(s);
-        //r.setId_role(1);
-
-        //personne.setAge(10);
-        //System.out.println( r.toString());
-        //System.out.println("bonjour AGE"+personne.getAge());
-
     }
-
 
    /* @Bean
     public BCryptPasswordEncoder passwordEncoder() {
